@@ -88,6 +88,27 @@
       .brand-title{font-size:10px}
       .hero-content h2{font-size:2.9rem}
     }
+  
+/* CINEMATIC AUTO SHOWCASE */
+.cinematic-showcase{position:relative;width:100%;height:590px;overflow:hidden;background:#03070c;border-bottom:1px solid rgba(243,198,109,.15)}
+.showcase-image-wrap{position:absolute;inset:0;overflow:hidden}
+#showcaseCarImage{width:100%;height:100%;display:block;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .8s ease,transform 5.8s ease}
+#showcaseCarImage.showcase-visible{opacity:1;transform:scale(1)}
+.showcase-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(90deg,rgba(3,8,14,.96) 0%,rgba(3,8,14,.78) 34%,rgba(3,8,14,.25) 68%,rgba(3,8,14,.52) 100%),linear-gradient(0deg,rgba(3,8,14,.78),transparent 55%)}
+.showcase-content{position:absolute;left:max(28px,calc((100% - 1210px)/2));bottom:105px;z-index:5;max-width:650px;color:#fff}
+.showcase-label{color:var(--gold);font-size:11px;font-weight:900;letter-spacing:4px;margin-bottom:16px}
+#showcaseCarTitle{margin:0;font-size:clamp(2.8rem,6vw,6.2rem);line-height:.9;letter-spacing:-3px;font-weight:900;text-transform:uppercase;text-shadow:0 10px 35px rgba(0,0,0,.5)}
+.showcase-price{margin-top:20px;color:var(--gold);font-size:1.45rem;font-weight:900}
+.showcase-details{display:flex;flex-wrap:wrap;gap:18px;margin-top:14px;color:#d8e0e8;font-size:12px;font-weight:700}
+.showcase-details span{position:relative}
+.showcase-details span:not(:last-child)::after{content:'•';position:absolute;right:-11px;color:var(--gold)}
+.showcase-progress{position:absolute;left:max(28px,calc((100% - 1210px)/2));right:max(28px,calc((100% - 1210px)/2));bottom:42px;height:2px;background:rgba(255,255,255,.2);z-index:6;overflow:hidden}
+#showcaseProgressBar{height:100%;width:0;background:var(--gold)}
+.showcase-progress.animate #showcaseProgressBar{animation:showcaseProgress 5s linear forwards}
+@keyframes showcaseProgress{from{width:0}to{width:100%}}
+.showcase-empty{position:absolute;inset:0;display:grid;place-items:center;color:#aeb9c6;font-size:13px;letter-spacing:1px;z-index:4}
+@media(max-width:600px){.cinematic-showcase{height:470px}.showcase-overlay{background:linear-gradient(0deg,rgba(3,8,14,.94),rgba(3,8,14,.48) 62%,rgba(3,8,14,.22))}.showcase-content{left:20px;right:20px;bottom:78px}#showcaseCarTitle{font-size:clamp(2.35rem,13vw,4.5rem);letter-spacing:-2px}.showcase-price{font-size:1.15rem}.showcase-details{gap:12px;font-size:11px}.showcase-progress{left:20px;right:20px;bottom:34px}}
+@media(prefers-reduced-motion:reduce){#showcaseCarImage{transition:opacity .2s ease;transform:none!important}.showcase-progress.animate #showcaseProgressBar{animation:none;width:100%}}
   </style>
 
   <!-- Firebase SDK Scripts -->
@@ -128,6 +149,21 @@
       <a href="https://wa.me/254721876026?text=Hello%20Kabata%20Motors,%20I%20want%20to%20sell%20my%20car%20through%20brokerage%20via%20https://kabatamotors.vercel.app." target="_blank" rel="noopener" style="color:#f3c66d;font-weight:bold;">💬 WhatsApp Car Broker Desk</a>
     </div>
   </div>
+
+
+  <!-- CINEMATIC AUTO SHOWCASE -->
+  <section class="cinematic-showcase" id="cinematicShowcase" aria-label="Featured vehicles">
+    <div class="showcase-image-wrap"><img id="showcaseCarImage" src="" alt="Featured vehicle"></div>
+    <div class="showcase-overlay"></div>
+    <div class="showcase-empty" id="showcaseEmpty">Loading featured vehicles...</div>
+    <div class="showcase-content">
+      <div class="showcase-label">FEATURED VEHICLE</div>
+      <h2 id="showcaseCarTitle">KABATA MOTORS</h2>
+      <div class="showcase-price" id="showcaseCarPrice"></div>
+      <div class="showcase-details"><span id="showcaseCarYear"></span><span id="showcaseCarLocation"></span><span id="showcaseCarTransmission"></span></div>
+    </div>
+    <div class="showcase-progress" aria-hidden="true"><div id="showcaseProgressBar"></div></div>
+  </section>
 
   <!-- Hero Section -->
   <section class="hero-section">
@@ -339,6 +375,56 @@
         return `Posted ${diffInMonths} month${diffInMonths > 1 ? 's' : ''} ago`;
     }
 
+
+    /* CINEMATIC AUTO SHOWCASE */
+    let showcaseCars = [];
+    let showcaseIndex = 0;
+    let showcaseTimer = null;
+    let showcaseStarted = false;
+    const showcaseImage = document.getElementById('showcaseCarImage');
+    const showcaseTitle = document.getElementById('showcaseCarTitle');
+    const showcasePrice = document.getElementById('showcaseCarPrice');
+    const showcaseYear = document.getElementById('showcaseCarYear');
+    const showcaseLocation = document.getElementById('showcaseCarLocation');
+    const showcaseTransmission = document.getElementById('showcaseCarTransmission');
+    const showcaseProgress = document.querySelector('.showcase-progress');
+    const showcaseEmpty = document.getElementById('showcaseEmpty');
+    const cinematicShowcase = document.getElementById('cinematicShowcase');
+
+    function updateShowcaseCars(carsMap){
+        showcaseCars=Object.entries(carsMap).map(([id,car])=>({id,car})).filter(({car})=>{
+            const image=car.imageUrl || (Array.isArray(car.imageUrls)&&car.imageUrls[0]);
+            const sold=car.status==='sold'||car.is_sold===true;
+            return Boolean(image)&&!sold;
+        });
+        if(!showcaseCars.length){if(showcaseEmpty)showcaseEmpty.textContent='No featured vehicles available yet.';return;}
+        if(showcaseEmpty)showcaseEmpty.style.display='none';
+        if(showcaseIndex>=showcaseCars.length)showcaseIndex=0;
+        showShowcaseCar(showcaseIndex);
+        if(!showcaseStarted){showcaseStarted=true;startShowcaseTimer();}
+    }
+
+    function showShowcaseCar(index){
+        if(!showcaseCars.length||!showcaseImage)return;
+        const item=showcaseCars[index]; if(!item)return;
+        const car=item.car; const image=car.imageUrl || (Array.isArray(car.imageUrls)&&car.imageUrls[0]); if(!image)return;
+        showcaseImage.classList.remove('showcase-visible');
+        setTimeout(()=>{
+            showcaseImage.src=image; showcaseImage.alt=car.title||'Featured vehicle';
+            showcaseTitle.textContent=car.title||'Featured Vehicle';
+            showcasePrice.textContent=car.price!=null?`KES ${Number(car.price).toLocaleString()}`:'';
+            showcaseYear.textContent=car.year?`YEAR ${car.year}`:'';
+            showcaseLocation.textContent=car.location?`📍 ${car.location}`:'';
+            showcaseTransmission.textContent=car.transmission?`⚙ ${car.transmission}`:'';
+            showcaseImage.classList.add('showcase-visible');
+            if(showcaseProgress){showcaseProgress.classList.remove('animate');void showcaseProgress.offsetWidth;showcaseProgress.classList.add('animate');}
+        },250);
+    }
+
+    function nextShowcaseCar(){if(!showcaseCars.length)return;showcaseIndex=(showcaseIndex+1)%showcaseCars.length;showShowcaseCar(showcaseIndex);}
+    function startShowcaseTimer(){clearInterval(showcaseTimer);if(showcaseCars.length>1)showcaseTimer=setInterval(nextShowcaseCar,5000);}
+    if(cinematicShowcase){cinematicShowcase.addEventListener('mouseenter',()=>clearInterval(showcaseTimer));cinematicShowcase.addEventListener('mouseleave',()=>startShowcaseTimer());}
+
     // Fetch initial dataset from Firestore
     db.collection('cars').orderBy('createdAt', 'desc').onSnapshot((snapshot) => {
         allCarsData = {};
@@ -346,6 +432,7 @@
             allCarsData[doc.id] = doc.data();
         });
         renderCars(allCarsData);
+        updateShowcaseCars(allCarsData);
     }, (error) => {
         console.error("Error fetching inventory: ", error);
         carListingsContainer.innerHTML = `<p style="color: #d97706; grid-column: 1 / -1; text-align: center; font-size: 14px;">Unable to load inventory. Please check your network connection.</p>`;
