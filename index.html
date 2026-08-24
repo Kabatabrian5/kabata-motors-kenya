@@ -5,60 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kabata motors - Kenya's Trusted Car Marketplace</title>
   
-  <!-- Embedded Responsive Fixes -->
+  <!-- Luxury Responsive Interface -->
   <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: #f4f6f8; color: #333; }
-    
-    /* Header Styles */
-    .full-header { background: #fff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 999; }
-    .nav-container { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; max-width: 1200px; margin: 0 auto; }
-    .brand-title { font-size: 1.25rem; font-weight: 800; margin: 0; }
-    .mobile-menu-btn { background: none; border: none; font-size: 22px; cursor: pointer; display: block; }
-    .desktop-nav { display: none; }
-    @media(min-width: 768px) {
-      .mobile-menu-btn { display: none; }
-      .desktop-nav { display: flex; gap: 20px; }
-      .desktop-nav a { text-decoration: none; color: #475569; font-weight: 500; }
-      .desktop-nav a.active { color: #ff4d00; }
+    *{box-sizing:border-box}
+    :root{--navy:#071321;--navy2:#0b1a2a;--panel:#0d1d2d;--panel2:#12263a;--line:#2b4055;--gold:#f3c66d;--gold2:#dcae50;--white:#f8fafc;--muted:#aeb9c6;--green:#35c878}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#06111d;color:var(--white);font-family:Inter,Arial,sans-serif;overflow-x:hidden}
+    button,input,select{font:inherit}
+
+    .full-header{height:77px;background:rgba(6,19,32,.97);border-bottom:1px solid rgba(255,255,255,.12);position:sticky;top:0;z-index:999;backdrop-filter:blur(14px)}
+    .nav-container{height:100%;max-width:1210px;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+    .brand-wrap{display:flex;align-items:center;gap:12px}
+    .brand-mark{width:41px;height:41px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-weight:900;font-size:13px;letter-spacing:-.5px}
+    .brand-copy{display:flex;flex-direction:column;line-height:1}
+    .brand-title{margin:0;color:#fff;font-size:14px;font-weight:900;letter-spacing:2.4px}
+    .brand-tagline{margin-top:8px;color:var(--gold);font-size:9px;font-weight:800;letter-spacing:2.3px}
+    .menu-button{height:42px;min-width:88px;padding:0 17px;border:0;border-radius:13px;background:var(--gold);color:#071321;cursor:pointer;font-size:12px;font-weight:900;letter-spacing:1.6px;transition:.2s}
+    .menu-button:hover{background:#ffd783;transform:translateY(-1px)}
+    .menu-button:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+    .menu-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.42);backdrop-filter:blur(2px);z-index:1090;opacity:0;visibility:hidden;transition:.25s}
+    .menu-backdrop.open{opacity:1;visibility:visible}
+    .mobile-drawer{position:fixed;top:88px;right:24px;width:290px;max-width:calc(100vw - 28px);max-height:calc(100vh - 104px);overflow:auto;padding:12px;background:rgba(8,22,36,.985);border:1px solid #30465b;border-radius:18px;z-index:1100;box-shadow:0 25px 70px rgba(0,0,0,.55);transform:translateX(130%);opacity:0;visibility:hidden;transition:transform .28s ease,opacity .25s ease,visibility .28s;display:flex;flex-direction:column}
+    .mobile-drawer.open{transform:translateX(0);opacity:1;visibility:visible}
+    .drawer-header{display:flex;align-items:center;justify-content:flex-end;gap:18px;padding:3px 3px 12px}
+    .drawer-header h3{margin:0;color:var(--gold);font-size:12px;letter-spacing:2px;text-transform:uppercase}
+    #closeDrawerBtn{color:var(--gold);font-size:27px;line-height:1;cursor:pointer;padding:0 2px}
+    .drawer-links{display:flex;flex-direction:column;gap:5px}
+    .drawer-links a{padding:12px 13px;text-decoration:none;color:#c7d0da;font-size:12px;font-weight:800;letter-spacing:.85px;text-transform:uppercase;border:1px solid #293d51;border-radius:12px;background:transparent;transition:.2s}
+    .drawer-links a:hover,.drawer-links a:first-child{color:var(--gold);border-color:var(--gold);background:rgba(243,198,109,.045)}
+
+    .hero-section{min-height:605px;display:flex;align-items:center;padding:72px 20px 55px;color:#fff;background:linear-gradient(90deg,rgba(3,14,25,.96) 0%,rgba(3,14,25,.87) 37%,rgba(3,14,25,.45) 70%,rgba(3,14,25,.73) 100%),linear-gradient(180deg,rgba(3,14,25,.12),rgba(3,14,25,.78)),url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1900&q=88') center/cover}
+    .hero-content{width:100%;max-width:1210px;margin:0 auto}
+    .hero-content:before{content:'PREMIUM VEHICLES IN KENYA';display:block;margin-bottom:26px;color:var(--gold);font-size:12px;font-weight:900;letter-spacing:3px}
+    .hero-content h2{margin:0 0 26px;max-width:520px;font-size:clamp(3.6rem,7vw,5.6rem);line-height:.9;letter-spacing:-3.5px;font-weight:900;color:#fff}
+    .hero-content p{max-width:570px;margin:0!important;color:#d5dde6;line-height:1.8;font-size:15px!important;font-weight:500!important;letter-spacing:0!important}
+
+    .main-layout-wrapper{position:relative;z-index:5;max-width:1210px;margin:-112px auto 0;padding:0 20px 48px;display:flex;flex-direction:column;gap:18px}
+    .search-filter,main{width:100%;padding:16px;border:1px solid #30475d;border-radius:16px;background:rgba(14,32,49,.97);box-shadow:0 18px 45px rgba(0,0,0,.3)}
+    .search-filter h3{margin:0 0 12px!important;color:#f4f7fa!important;font-size:13px!important;letter-spacing:1.5px;text-transform:uppercase}
+    .filters-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .filters-grid select,.filters-grid input{width:100%;min-height:45px;padding:10px 14px;border:1px solid #39516a;border-radius:11px;background:#193149;color:#e9eef4;font-size:13px;outline:none}
+    .filters-grid select:focus,.filters-grid input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(243,198,109,.11)}
+    .filters-grid input::placeholder{color:#98a8b8}
+    .filter-heading-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .reset-filters{border:0;background:none;color:var(--gold);font-size:11px;font-weight:800;cursor:pointer;padding:2px 0}
+    main{background:#0b1b2a}
+    main h3{color:#fff!important;border-left-color:var(--gold)!important}
+    .car-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:100%}
+
+    #carListings>div{border-color:#2a4055!important;background:#091725!important;box-shadow:0 8px 25px rgba(0,0,0,.22)!important}
+    #carListings h4{color:#f5f7fa!important}
+
+    #carModal{background:rgba(0,0,0,.78)!important;backdrop-filter:blur(5px)}
+    #carModal>div{background:#0c1c2b!important;border:1px solid #30465b;color:#fff}
+
+    @media(max-width:900px){
+      .filters-grid{grid-template-columns:repeat(2,1fr)}
+      .car-grid{grid-template-columns:repeat(2,1fr)}
+      .hero-section{min-height:560px}
     }
-
-    /* Mobile Drawer */
-    .mobile-drawer { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; background: #fff; z-index: 1100; transition: left 0.3s ease; box-shadow: 2px 0 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
-    .mobile-drawer.open { left: 0; }
-    .drawer-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid #eee; }
-    .drawer-header h3 { margin: 0; font-size: 1.1rem; }
-    #closeDrawerBtn { font-size: 28px; cursor: pointer; }
-    .drawer-links { display: flex; flex-direction: column; padding: 10px 0; }
-    .drawer-links a { padding: 12px 20px; text-decoration: none; color: #333; font-weight: 500; border-bottom: 1px solid #f8f8f8; }
-
-    /* Hero Section */
-    .hero-section { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80') center/cover; padding: 40px 16px; text-align: center; color: #fff; }
-    .hero-content h2 { font-size: 1.6rem; margin: 0 0 8px 0; letter-spacing: 1px; }
-
-    /* Main Website Wrapper */
-    .main-layout-wrapper { display: flex; flex-direction: column; gap: 16px; padding: 16px; max-width: 1200px; margin: 0 auto; }
-
-    /* Containers */
-    .search-filter, main { background: #fff; padding: 16px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); width: 100%; }
-    
-    /* Filters Grid */
-    .filters-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-    @media(min-width: 500px) {
-      .filters-grid { grid-template-columns: repeat(2, 1fr); }
+    @media(max-width:600px){
+      .full-header{height:68px}
+      .nav-container{padding:0 14px}
+      .brand-mark{width:36px;height:36px;font-size:12px}
+      .brand-title{font-size:11px;letter-spacing:1.8px}
+      .brand-tagline{font-size:8px;margin-top:7px}
+      .menu-button{height:38px;min-width:78px;padding:0 13px;font-size:11px}
+      .mobile-drawer{top:78px;right:10px;width:calc(100vw - 20px);max-height:calc(100vh - 90px);border-radius:15px}
+      .hero-section{min-height:535px;padding:62px 16px 140px;background-position:62% center}
+      .hero-content:before{font-size:10px;letter-spacing:2.4px;margin-bottom:20px}
+      .hero-content h2{font-size:clamp(3rem,15vw,4.25rem);letter-spacing:-2.5px;line-height:.91}
+      .hero-content p{font-size:13px!important;line-height:1.7;max-width:330px}
+      .main-layout-wrapper{padding:0 12px 30px;margin-top:-100px}
+      .search-filter,main{padding:13px;border-radius:14px}
+      .filters-grid,.car-grid{grid-template-columns:1fr}
+      .filters-grid{gap:9px}
+      .filters-grid select,.filters-grid input{min-height:44px}
     }
-    @media(min-width: 768px) {
-      .filters-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    .filters-grid select, .filters-grid input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #fff; }
-
-    /* Car Grid Listings */
-    .car-grid { display: grid; grid-template-columns: 1fr; gap: 16px; width: 100%; }
-    @media(min-width: 560px) {
-      .car-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media(min-width: 1024px) {
-      .car-grid { grid-template-columns: repeat(3, 1fr); }
+    @media(max-width:380px){
+      .brand-copy{max-width:155px}
+      .brand-title{font-size:10px}
+      .hero-content h2{font-size:2.9rem}
     }
   </style>
 
@@ -68,28 +96,27 @@
 </head>
 <body>
 
-  <!-- Full-Width Header -->
+  <!-- Luxury Header -->
   <header class="full-header">
     <div class="nav-container">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <button id="menuToggleBtn" class="mobile-menu-btn">☰</button>
-        <h1 class="brand-title">KABATA <span style="color: #ff4d00;">MOTORS</span></h1>
+      <div class="brand-wrap">
+        <div class="brand-mark">KM</div>
+        <div class="brand-copy">
+          <h1 class="brand-title">KABATA MOTORS</h1>
+          <div class="brand-tagline">DRIVEN BY TRUST</div>
+        </div>
       </div>
-      
-      <nav id="desktopNav" class="desktop-nav">
-        <a href="#" class="nav-link active">Home</a>
-        <a href="#" class="nav-link">🔥 Hot Deals</a>
-        <a href="#" class="nav-link">Find a Car</a>
-        <a href="#" class="nav-link">Our Services</a>
-      </nav>
+      <button id="menuToggleBtn" class="menu-button" type="button" aria-expanded="false" aria-controls="mobileNavDrawer">MENU</button>
     </div>
   </header>
 
-  <!-- Mobile Slide-out Menu Drawer -->
-  <div id="mobileNavDrawer" class="mobile-drawer">
+  <div id="menuBackdrop" class="menu-backdrop"></div>
+
+  <!-- Right-side Menu: CLOSED BY DEFAULT -->
+  <div id="mobileNavDrawer" class="mobile-drawer" aria-hidden="true">
     <div class="drawer-header">
       <h3>Menu</h3>
-      <span id="closeDrawerBtn">&times;</span>
+      <span id="closeDrawerBtn" role="button" tabindex="0" aria-label="Close menu">&times;</span>
     </div>
     <div class="drawer-links">
       <a href="#">🏠 Home</a>
@@ -98,15 +125,15 @@
       <a href="#">🛠️ Our Services</a>
       <a href="#">📑 Import Duty Guide</a>
       <a href="#">⭐ Verified Sellers</a>
-      <a href="https://wa.me/254721876026?text=Hello%20Kabata%20Motors,%20I%20want%20to%20sell%20my%20car%20through%20brokerage%20via%20https://kabatamotors.vercel.app." target="_blank" style="color: #ff4d00; font-weight: bold;">💬 WhatsApp Car Broker Desk</a>
+      <a href="https://wa.me/254721876026?text=Hello%20Kabata%20Motors,%20I%20want%20to%20sell%20my%20car%20through%20brokerage%20via%20https://kabatamotors.vercel.app." target="_blank" rel="noopener" style="color:#f3c66d;font-weight:bold;">💬 WhatsApp Car Broker Desk</a>
     </div>
   </div>
 
-  <!-- Full-Width Hero Section -->
+  <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-content">
-      <h2>AFRICA'S NO.1</h2>
-      <p style="font-size: 1.1rem; font-weight: 600; margin: 0; letter-spacing: 0.5px;">MOTOR VEHICLE MARKETPLACE</p>
+      <h2>Drive your<br>ambition.</h2>
+      <p>A considered collection of quality vehicles, prepared for the roads and ready for their next chapter.</p>
     </div>
   </section>
 
@@ -115,7 +142,10 @@
     
     <!-- Expanded Search & Filter Section -->
     <div class="search-filter">
-      <h3 style="font-size: 1rem; margin-top: 0; margin-bottom: 12px; color: #111;">Search & Filter Kenya Inventory</h3>
+      <div class="filter-heading-row">
+        <h3 style="font-size: 1rem; margin-top: 0; margin-bottom: 12px; color: #111;">Find Your Next Car</h3>
+        <button id="resetFiltersBtn" class="reset-filters" type="button">Reset filters</button>
+      </div>
       <div class="filters-grid">
         <select id="makeFilter">
           <option value="">All Makes (Kenya Market)</option>
@@ -240,13 +270,39 @@
 
   <!-- SCRIPT -->
   <script>
-    // Mobile Drawer Toggle Control
+    // Luxury right-side menu — CLOSED BY DEFAULT
     const menuToggleBtn = document.getElementById('menuToggleBtn');
     const mobileNavDrawer = document.getElementById('mobileNavDrawer');
     const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    const menuBackdrop = document.getElementById('menuBackdrop');
 
-    menuToggleBtn.onclick = () => mobileNavDrawer.classList.add('open');
-    closeDrawerBtn.onclick = () => mobileNavDrawer.classList.remove('open');
+    function setMenu(open) {
+      mobileNavDrawer.classList.toggle('open', open);
+      menuBackdrop.classList.toggle('open', open);
+      mobileNavDrawer.setAttribute('aria-hidden', String(!open));
+      menuToggleBtn.setAttribute('aria-expanded', String(open));
+      menuToggleBtn.textContent = open ? 'CLOSE' : 'MENU';
+    }
+
+    menuToggleBtn.onclick = () => setMenu(!mobileNavDrawer.classList.contains('open'));
+    closeDrawerBtn.onclick = () => setMenu(false);
+    closeDrawerBtn.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setMenu(false); } };
+    menuBackdrop.onclick = () => setMenu(false);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+
+    // Reset all inventory filters without changing the existing inventory logic.
+    const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+    if (resetFiltersBtn) {
+      resetFiltersBtn.onclick = () => {
+        document.getElementById('makeFilter').value = '';
+        document.getElementById('searchInput').value = '';
+        document.getElementById('priceRangeFilter').value = '';
+        document.getElementById('yearRangeFilter').value = '';
+        document.getElementById('locationFilter').value = '';
+        document.getElementById('transmissionFilter').value = '';
+        renderCars(allCarsData);
+      };
+    }
 
     const firebaseConfig = {
         apiKey: "AIzaSyBxdXaRmelsJjHkY9VvFl63p3ID_Daq0SE",
