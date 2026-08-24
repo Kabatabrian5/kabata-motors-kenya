@@ -114,8 +114,36 @@
   <!-- Firebase SDK Scripts -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+<!-- KABATA PREMIUM LOADING SCREEN -->
+<style>
+#kabataLoader{position:fixed;inset:0;background:#050607;z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity .7s ease,visibility .7s ease}
+#kabataLoader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.loader-inner{text-align:center;color:#fff;position:relative}
+.loader-logo{font-size:clamp(28px,5vw,52px);font-weight:900;letter-spacing:5px;margin:0}.loader-logo span{color:#d4af37}
+.loader-tag{font-size:10px;letter-spacing:6px;color:#9ca3af;margin-top:12px}
+.loader-line{width:220px;height:2px;background:#222;margin:28px auto 0;overflow:hidden}.loader-line i{display:block;width:45%;height:100%;background:#d4af37;animation:loaderMove 1.25s ease-in-out infinite}
+.loader-percent{font-size:11px;color:#d4af37;letter-spacing:2px;margin-top:12px}
+@keyframes loaderMove{0%{transform:translateX(-120%)}50%{transform:translateX(120%)}100%{transform:translateX(280%)}}
+.loader-ring{position:absolute;width:260px;height:260px;border:1px solid rgba(212,175,55,.13);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);animation:loaderSpin 8s linear infinite}
+.loader-ring:after{content:"";position:absolute;top:-2px;left:50%;width:4px;height:4px;background:#d4af37;border-radius:50%;box-shadow:0 0 14px #d4af37}
+@keyframes loaderSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@media(max-width:480px){.loader-ring{width:210px;height:210px}.loader-line{width:190px}.loader-logo{letter-spacing:3px}}
+</style>
+
 </head>
 <body>
+
+<div id="kabataLoader" aria-label="Loading Kabata Motors">
+  <div class="loader-ring"></div>
+  <div class="loader-inner">
+    <h1 class="loader-logo">KABATA <span>MOTORS</span></h1>
+    <div class="loader-tag">PREMIUM VEHICLE MARKETPLACE</div>
+    <div class="loader-line"><i></i></div>
+    <div class="loader-percent" id="loaderPercent">0%</div>
+  </div>
+</div>
+
 
   <!-- Luxury Header -->
   <header class="full-header">
@@ -619,5 +647,26 @@
         document.getElementById('carModal').style.display = 'none';
     }
   </script>
+
+<script>
+(function(){
+  const loader=document.getElementById('kabataLoader');
+  const percent=document.getElementById('loaderPercent');
+  let value=0;
+  const tick=setInterval(()=>{
+    value=Math.min(value+Math.floor(Math.random()*12)+4,96);
+    percent.textContent=value+'%';
+  },120);
+  function finish(){
+    clearInterval(tick);
+    percent.textContent='100%';
+    setTimeout(()=>loader.classList.add('hide'),350);
+  }
+  if(document.readyState==='complete') finish();
+  else window.addEventListener('load',finish,{once:true});
+  setTimeout(finish,4500);
+})();
+</script>
+
 </body>
 </html>
