@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             ⏱️ ${timeAgo}
           </div>
           <div class="car-img-container" style="background:#f4f4f4; height:160px;">
-            <img src="${rawImage}" alt="${car.make} ${car.model}" loading="lazy" style="width: 100%; height: 160px; object-fit: cover;">
+            <img src="${rawImage}" alt="${car.make} ${car.model}" loading="${index === 0 ? 'eager' : 'lazy'}" fetchpriority="${index === 0 ? 'high' : 'auto'}" decoding="async" width="800" height="450" style="width: 100%; height: 160px; object-fit: cover;">
           </div>
           <div class="car-details" style="padding: 15px;">
             <h3 style="font-size: 1.1rem; color: #111; margin: 0 0 8px 0;">${car.make} ${car.model}</h3>

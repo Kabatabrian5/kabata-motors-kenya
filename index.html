@@ -130,7 +130,7 @@ body{background:#07090b;color:#f5f5f5;overflow-x:hidden}
 
   <!-- Full-Width Hero Section -->
   <section class="hero-section" id="heroShowcase">
-    <img id="heroCinematicImage" class="hero-cinematic-image" src="" alt="Featured Kabata Motors vehicle">
+    <img id="heroCinematicImage" class="hero-cinematic-image" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=75" alt="Featured Kabata Motors vehicle" loading="eager" fetchpriority="high" decoding="async">
     <div class="hero-content">
       <div style="color:#d4af37;font-size:12px;font-weight:800;letter-spacing:5px;margin-bottom:14px;">KABATA MOTORS</div>
       <h2 id="heroCarTitle">AFRICA'S NO.1</h2>
@@ -424,7 +424,7 @@ body{background:#07090b;color:#f5f5f5;overflow-x:hidden}
             
             card.innerHTML = `
                 <div style="height: 160px; overflow: hidden; background: #f1f5f9; display: flex; align-items: center; justify-content: center; position: relative;">
-                    <img src="${mainImage}" alt="${car.title}" style="width: 100%; height: 100%; object-fit: cover; ${isSold ? 'filter: grayscale(40%);' : ''}">
+                    <img src="${mainImage}" alt="${car.title}" loading="${displayedCount <= 4 ? 'eager' : 'lazy'}" decoding="async" fetchpriority="${displayedCount === 1 ? 'high' : 'auto'}" style="width: 100%; height: 100%; object-fit: cover; ${isSold ? 'filter: grayscale(40%);' : ''}">
                     ${soldBadgeHTML}
                     <span style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.75); color: #fff; padding: 3px 8px; font-size: 11px; border-radius: 4px; font-weight: 500; z-index: 4;">⏱️ ${timeAgoText.replace('Posted ', '')}</span>
                 </div>
