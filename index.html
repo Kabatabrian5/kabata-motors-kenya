@@ -85,6 +85,29 @@ body{background:#07090b;color:#f5f5f5;overflow-x:hidden}
 @media(max-width:767px){.hero-section{height:470px!important}.hero-content{left:22px;right:22px;bottom:80px}.hero-content h2{font-size:clamp(2.7rem,14vw,5rem)!important;letter-spacing:-2px!important}.hero-content p{font-size:10px!important;letter-spacing:3px!important}.hero-progress{left:22px;right:22px;bottom:35px}.mobile-drawer{width:100%!important;max-width:100%}.admin-grid{grid-template-columns:1fr}.admin-box{max-height:95vh}}
 @media(prefers-reduced-motion:reduce){.hero-cinematic-image{transition:opacity .2s}.hero-section:after{animation:none}.hero-progress.animate .hero-progress-bar{animation:none;width:100%}}
 
+/* Kabata premium gold finish */
+body{background:#090b0e!important;color:#f5f1e8!important;font-family:Arial,sans-serif}
+.full-header{background:rgba(9,11,14,.94)!important;border-bottom:1px solid rgba(212,175,55,.35)!important}
+.brand-title{font-size:1.35rem!important;letter-spacing:2.5px!important}.brand-title span{color:#d4af37!important}
+.desktop-nav{gap:28px!important}.desktop-nav .nav-link{color:#c9c4b8!important}.desktop-nav .nav-link:hover,.desktop-nav .nav-link.active{color:#d4af37!important}
+.mobile-menu-btn{border:1px solid rgba(212,175,55,.55)!important;border-radius:7px!important;color:#f4c779!important}
+.hero-section{background:#090b0e!important;box-shadow:inset 0 -80px 90px rgba(0,0,0,.5)}
+.hero-section:before{background:linear-gradient(90deg,rgba(5,7,9,.94),rgba(5,7,9,.62) 48%,rgba(5,7,9,.2)),linear-gradient(0deg,rgba(5,7,9,.82),transparent 60%)!important}
+.hero-content h2{font-weight:900!important;text-shadow:0 8px 30px rgba(0,0,0,.5)}
+.hero-content p,.hero-meta span:first-child{color:#f4c779!important}
+.main-layout-wrapper{margin-top:-70px!important;gap:24px!important}
+.search-filter{background:rgba(17,20,24,.98)!important;border:1px solid rgba(212,175,55,.28)!important;border-radius:14px!important;box-shadow:0 24px 70px rgba(0,0,0,.45)!important}
+.search-filter h3{color:#f4c779!important;letter-spacing:.08em!important;text-transform:uppercase}
+.filters-grid select,.filters-grid input{background:#0b0e12!important;border:1px solid #34383d!important;color:#f5f1e8!important;border-radius:7px!important}.filters-grid select:focus,.filters-grid input:focus{border-color:#d4af37!important;box-shadow:0 0 0 2px rgba(212,175,55,.12)!important}
+.main-layout-wrapper>main{background:#11151a!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:14px!important;box-shadow:0 20px 60px rgba(0,0,0,.25)!important}
+.main-layout-wrapper>main>h3{color:#f4c779!important;letter-spacing:.08em!important;text-transform:uppercase}
+.car-grid{gap:22px!important}.car-grid>div,.car-card{background:#171c22!important;border:1px solid rgba(255,255,255,.1)!important;box-shadow:0 12px 35px rgba(0,0,0,.22)!important;border-radius:12px!important}.car-grid>div:hover{border-color:rgba(212,175,55,.7)!important;box-shadow:0 20px 50px rgba(0,0,0,.4)!important}
+.car-grid .car-details h3,.car-card h3,.car-card h4{color:#fff!important}.car-grid .car-details p,.car-card p{color:#aaa69d!important}.car-grid .car-details p[style*="ff4d00"],.car-card p[style*="ff4d00"]{color:#d4af37!important}
+.car-card button{background:#d4af37!important;color:#0a0b0d!important}.car-card button:hover{background:#f4c779!important}
+.mobile-drawer{background:#0d1014!important;border-left:1px solid rgba(212,175,55,.4)!important}.drawer-header{border-bottom:1px solid rgba(212,175,55,.28)!important}.drawer-links a:hover{color:#f4c779!important;background:rgba(212,175,55,.08)!important}
+@media(max-width:767px){.hero-content h2{font-size:clamp(2.8rem,13vw,5rem)!important}.main-layout-wrapper{margin-top:-45px!important;padding:0 12px!important}.search-filter{border-radius:12px!important}.main-layout-wrapper>main{padding:14px!important}.filters-grid{grid-template-columns:1fr!important;gap:10px!important}.filters-grid select,.filters-grid input{min-height:46px!important;padding:12px!important}.drawer-links{padding:18px 20px!important;gap:5px!important}.drawer-links a{padding:14px 8px!important;font-size:14px!important}}
+#landingInventory{display:none!important}
+
   </style>
 
   <!-- Firebase SDK Scripts -->
@@ -106,6 +129,7 @@ body{background:#07090b;color:#f5f5f5;overflow-x:hidden}
         <a href="#" class="nav-link">🔥 Hot Deals</a>
         <a href="#" class="nav-link">Find a Car</a>
         <a href="#" class="nav-link">Our Services</a>
+          <a href="#" id="desktopAdminLink" class="nav-link admin-nav-link">Admin Login</a>
       </nav>
     </div>
   </header>
@@ -217,7 +241,7 @@ body{background:#07090b;color:#f5f5f5;overflow-x:hidden}
     </div>
 
     <!-- Listings Grid Section -->
-    <main>
+    <main id="landingInventory" aria-hidden="true">
       <h3 style="font-size: 1.1rem; margin-top: 0; margin-bottom: 16px; color: #111; border-left: 4px solid #ff4d00; padding-left: 8px;">Fresh Listings in Kenya</h3>
       <div id="carListings" class="car-grid">
         <p style="color: #666; font-size: 14px;">Loading available cars from inventory...</p>
@@ -613,7 +637,7 @@ const adminRows=document.getElementById('adminInventoryRows');
 let adminReady=false;
 function openAdmin(){adminPanel.classList.add('open');adminLogin.style.display=adminReady?'none':'block';adminDashboard.style.display=adminReady?'block':'none';if(adminReady)renderAdminInventory();}
 function closeAdmin(){adminPanel.classList.remove('open');}
-document.getElementById('adminMenuLink').onclick=(e)=>{e.preventDefault();mobileNavDrawer.classList.remove('open');openAdmin();};
+document.getElementById('adminMenuLink').onclick=(e)=>{e.preventDefault();mobileNavDrawer.classList.remove('open');openAdmin();};document.getElementById('desktopAdminLink').onclick=(e)=>{e.preventDefault();openAdmin();};
 document.getElementById('adminCloseBtn').onclick=closeAdmin;
 document.getElementById('adminLoginBtn').onclick=()=>{const pin=document.getElementById('adminPinInput').value;if(pin===ADMIN_PIN){adminReady=true;document.getElementById('adminLoginMsg').textContent='';adminLogin.style.display='none';adminDashboard.style.display='block';renderAdminInventory();}else document.getElementById('adminLoginMsg').textContent='Incorrect admin PIN.';};
 document.getElementById('adminLogoutBtn').onclick=()=>{adminReady=false;adminDashboard.style.display='none';adminLogin.style.display='block';document.getElementById('adminPinInput').value='';};
