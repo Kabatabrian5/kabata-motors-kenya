@@ -143,7 +143,12 @@ body{background:var(--showroom-black)!important;color:var(--showroom-text)!impor
 .main-layout-wrapper>main{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}.main-layout-wrapper>main>h3{border-left-color:var(--showroom-orange)!important}.car-grid{gap:18px!important}.car-grid .car-card{background:var(--showroom-panel)!important;border:1px solid var(--showroom-line)!important;border-radius:2px!important;box-shadow:0 12px 28px rgba(0,0,0,.3)!important}.car-grid .car-card:hover{transform:translateY(-4px)!important;border-color:#555!important;box-shadow:0 18px 36px rgba(0,0,0,.48)!important}.car-grid .car-card h4{color:var(--showroom-text)!important}.car-grid .car-card p{color:var(--showroom-muted)!important}.car-grid .car-card p[style*="ff4d00"]{color:var(--showroom-orange)!important}.car-grid .car-card button{background:var(--showroom-orange)!important;color:#fff!important;border-radius:2px!important}.car-grid .car-card button:hover{background:#ff7952!important}
 .mobile-drawer{background:#0d0e0e!important;border-left-color:var(--showroom-line)!important}.drawer-header{border-bottom-color:var(--showroom-line)!important}.drawer-header h3,.drawer-links a{color:var(--showroom-text)!important}.drawer-links a:hover{color:var(--showroom-orange)!important;background:#171110!important}.mobile-bottom-nav{background:#0d0e0e!important;border-top-color:var(--showroom-line)!important}.mobile-bottom-nav .nav-item{color:var(--showroom-muted)!important}.mobile-bottom-nav .nav-item.active,.mobile-bottom-nav .nav-item:hover{color:var(--showroom-orange)!important}
 #carModal>div{background:#101212!important;color:var(--showroom-text)!important}#carModal h2,#carModal h4{color:var(--showroom-text)!important}#carModal .modal-darkbox{background:#171919!important;color:#d1d0c9!important}
+.specific-car-modal{display:none;position:fixed;inset:0;z-index:2500;align-items:center;justify-content:center;padding:18px;background:rgba(8,9,9,.64);backdrop-filter:blur(8px)}.specific-car-modal.open{display:flex}.specific-car-dialog{position:relative;width:min(520px,100%);padding:30px;background:#fff;color:#17212b;border:1px solid #dedbd4;box-shadow:0 24px 70px rgba(0,0,0,.28)}.specific-car-close{position:absolute;top:10px;right:12px;border:0;background:transparent;color:#687078;font-size:28px;cursor:pointer}.specific-car-kicker{margin:0 0 8px;color:var(--showroom-orange);font-size:11px;font-weight:800;letter-spacing:.18em}.specific-car-dialog h2{margin:0 0 8px;font-family:Georgia,serif;font-size:2rem}.specific-car-dialog p:not(.specific-car-kicker){color:#687078;font-size:14px;line-height:1.5}.specific-car-dialog textarea{display:block;width:100%;margin:20px 0 12px;padding:14px;resize:vertical;border:1px solid #d7d3ca;border-radius:2px;font:inherit;color:#17212b}.specific-car-dialog textarea:focus{outline:2px solid rgba(239,90,50,.2);border-color:var(--showroom-orange)}.specific-car-send{width:100%;padding:13px;border:0;border-radius:2px;background:#25d366;color:#fff;font-weight:800;cursor:pointer}.specific-car-send:hover{background:#1da851}
 @media(max-width:767px){.nav-container{padding:14px 16px!important}.hero-section{height:250px!important}.hero-content{left:18px!important;right:18px!important;bottom:48px!important}.hero-content h2{font-size:clamp(2.2rem,12vw,4rem)!important}.hero-content p{font-size:10px!important;letter-spacing:.16em!important}.hero-meta{gap:10px!important;font-size:11px!important}.hero-progress{left:18px!important;right:18px!important;bottom:22px!important}.main-layout-wrapper{padding:28px 14px 42px!important}.search-filter{border-radius:2px!important}.car-grid{gap:12px!important}.car-grid .car-card .car-details{padding:12px!important}}
+
+/* Welcoming hero image with a light, editorial inventory surface. */
+.hero-section{height:390px!important;background:#15191b!important}.hero-cinematic-image{display:block!important;opacity:1!important;transform:none!important;object-position:center 58%!important}.hero-section:before{background:linear-gradient(90deg,rgba(8,12,14,.86),rgba(8,12,14,.4) 52%,rgba(8,12,14,.08))!important}.hero-content{bottom:78px!important}.main-layout-wrapper{background:#f3f2ee!important;max-width:none!important;padding-left:max(30px,calc((100% - 1320px)/2 + 30px))!important;padding-right:max(30px,calc((100% - 1320px)/2 + 30px))!important}.main-layout-wrapper>main{background:transparent!important}.search-filter{background:#fff!important;color:#17212b!important;border-color:#dedbd4!important;box-shadow:0 10px 25px rgba(23,33,43,.08)!important}.search-filter h3,.main-layout-wrapper>main>h3{color:#17212b!important}.filters-grid select,.filters-grid input{background:#fff!important;color:#17212b!important;border-color:#d7d3ca!important}.car-grid .car-card{background:#fff!important;color:#17212b!important;border-color:#dedbd4!important;box-shadow:0 8px 22px rgba(23,33,43,.08)!important}.car-grid .car-card h4{color:#17212b!important}.car-grid .car-card p{color:#687078!important}.car-grid .car-card button{background:#17212b!important;color:#fff!important}.car-grid .car-card button:hover{background:var(--showroom-orange)!important}.main-layout-wrapper>main>h3{border-left-color:var(--showroom-orange)!important}
+@media(max-width:767px){.hero-section{height:250px!important}.hero-content{bottom:48px!important}.main-layout-wrapper{padding-left:14px!important;padding-right:14px!important}}
 
   </style>
 
@@ -163,9 +168,9 @@ body{background:var(--showroom-black)!important;color:var(--showroom-text)!impor
       
       <nav id="desktopNav" class="desktop-nav">
         <a href="#" class="nav-link active">Home</a>
-        <a href="#" class="nav-link">🔥 Hot Deals</a>
-        <a href="#" class="nav-link">Find a Car</a>
-        <a href="#" class="nav-link">Our Services</a>
+        <a href="#" id="hotDealsLink" class="nav-link">🔥 Hot Deals</a>
+        <a href="#" id="findCarLink" class="nav-link">Find a Car</a>
+        <a href="#" id="specificCarLink" class="nav-link">Looking for a specific car?</a>
           <a href="#" id="desktopAdminLink" class="nav-link admin-nav-link">Admin Login</a>
       </nav>
     </div>
@@ -179,19 +184,17 @@ body{background:var(--showroom-black)!important;color:var(--showroom-text)!impor
     </div>
     <div class="drawer-links">
       <a href="#">🏠 Home</a>
-      <a href="#">🔥 Hot Deals</a>
-      <a href="#">🚗 Find a Car</a>
-      <a href="#">🛠️ Our Services</a>
-      <a href="#">📑 Import Duty Guide</a>
-      <a href="#">⭐ Verified Sellers</a>
-      <a href="https://wa.me/254721876026?text=Hello%20Kabata%20Motors,%20I%20want%20to%20sell%20my%20car%20through%20brokerage%20via%20https://kabatamotors.vercel.app." target="_blank" style="color: #ff4d00; font-weight: bold;">💬 WhatsApp Car Broker Desk</a>
+      <a href="#" id="mobileHotDealsLink">🔥 Hot Deals</a>
+      <a href="#" id="mobileFindCarLink">🚗 Find a Car</a>
+      <a href="#" id="mobileSpecificCarLink">🔎 Looking for a specific car?</a>
+      <a href="https://wa.me/254721876026" target="_blank" style="color: #ff4d00; font-weight: bold;">💬 WhatsApp</a>
       <a href="#" id="adminMenuLink" style="color:#d4af37;font-weight:bold;">🔐 Admin</a>
     </div>
   </div>
 
   <!-- Full-Width Hero Section -->
   <section class="hero-section" id="heroShowcase">
-    <img id="heroCinematicImage" class="hero-cinematic-image" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=75" alt="Featured Kabata Motors vehicle" loading="eager" fetchpriority="high" decoding="async">
+    <img id="heroCinematicImage" class="hero-cinematic-image" src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=85" alt="Featured Kabata Motors vehicle" loading="eager" fetchpriority="high" decoding="async">
     <div class="hero-content">
       <div style="color:#d4af37;font-size:12px;font-weight:800;letter-spacing:5px;margin-bottom:14px;">KABATA MOTORS</div>
       <h2 id="heroCarTitle">AFRICA'S NO.1</h2>
@@ -374,6 +377,17 @@ body{background:var(--showroom-black)!important;color:var(--showroom-text)!impor
     </div>
   </div>
 
+  <div id="specificCarModal" class="specific-car-modal" aria-hidden="true">
+    <div class="specific-car-dialog" role="dialog" aria-modal="true" aria-labelledby="specificCarTitle">
+      <button type="button" id="closeSpecificCarBtn" class="specific-car-close" aria-label="Close">&times;</button>
+      <p class="specific-car-kicker">KABATA MOTORS</p>
+      <h2 id="specificCarTitle">Looking for a specific car?</h2>
+      <p>Tell us the make, model, budget, year, or any other details you need.</p>
+      <textarea id="specificCarSpecs" rows="5" placeholder="Example: Toyota Harrier, 2018 or newer, automatic, budget KES 2.5M, Nairobi"></textarea>
+      <button type="button" id="sendSpecificCarBtn" class="specific-car-send">Send specs on WhatsApp</button>
+    </div>
+  </div>
+
   <!-- SCRIPT -->
   <script>
     // Mobile Drawer Toggle Control
@@ -435,6 +449,14 @@ body{background:var(--showroom-black)!important;color:var(--showroom-text)!impor
     });
 
     // Render Function with Live Filters Applied Automatically on Change/Input
+    let activeInventoryView = 'all';
+
+    function isRecentCar(car) {
+      if (!car.createdAt) return false;
+      const postedDate = car.createdAt.toDate ? car.createdAt.toDate() : new Date(car.createdAt);
+      return !Number.isNaN(postedDate.getTime()) && (Date.now() - postedDate.getTime()) <= 30 * 24 * 60 * 60 * 1000;
+    }
+
     function renderCars(carsMap) {
         const makeVal = document.getElementById('makeFilter').value.toLowerCase();
         const searchVal = document.getElementById('searchInput').value.toLowerCase().trim();
@@ -447,6 +469,7 @@ body{background:var(--showroom-black)!important;color:var(--showroom-text)!impor
         let displayedCount = 0;
 
         for (const [id, car] of Object.entries(carsMap)) {
+          if (activeInventoryView === 'hot-deals' && (Number(car.price) <= 1000000 || !isRecentCar(car) || car.status === 'sold' || car.is_sold === true)) continue;
             if (makeVal && (!car.make || car.make.toLowerCase() !== makeVal)) continue;
 
             if (searchVal) {
@@ -517,6 +540,56 @@ body{background:var(--showroom-black)!important;color:var(--showroom-text)!impor
     document.getElementById('yearRangeFilter').onchange = () => renderCars(allCarsData);
     document.getElementById('locationFilter').onchange = () => renderCars(allCarsData);
     document.getElementById('transmissionFilter').onchange = () => renderCars(allCarsData);
+
+    function showAllInventory() {
+      activeInventoryView = 'all';
+      renderCars(allCarsData);
+      document.getElementById('landingInventory').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showHotDeals(event) {
+      if (event) event.preventDefault();
+      activeInventoryView = 'hot-deals';
+      renderCars(allCarsData);
+      document.getElementById('landingInventory').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function focusCarSearch(event) {
+      event.preventDefault();
+      showAllInventory();
+      const searchInput = document.getElementById('searchInput');
+      searchInput.focus();
+      searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      mobileNavDrawer.classList.remove('open');
+    }
+
+    const specificCarModal = document.getElementById('specificCarModal');
+    function openSpecificCarModal(event) {
+      event.preventDefault();
+      mobileNavDrawer.classList.remove('open');
+      specificCarModal.classList.add('open');
+      specificCarModal.setAttribute('aria-hidden', 'false');
+      document.getElementById('specificCarSpecs').focus();
+    }
+    function closeSpecificCarModal() {
+      specificCarModal.classList.remove('open');
+      specificCarModal.setAttribute('aria-hidden', 'true');
+    }
+    document.getElementById('hotDealsLink').onclick = showHotDeals;
+    document.getElementById('mobileHotDealsLink').onclick = showHotDeals;
+    document.getElementById('findCarLink').onclick = focusCarSearch;
+    document.getElementById('mobileFindCarLink').onclick = focusCarSearch;
+    document.getElementById('specificCarLink').onclick = openSpecificCarModal;
+    document.getElementById('mobileSpecificCarLink').onclick = openSpecificCarModal;
+    document.getElementById('closeSpecificCarBtn').onclick = closeSpecificCarModal;
+    specificCarModal.onclick = (event) => { if (event.target === specificCarModal) closeSpecificCarModal(); };
+    document.getElementById('sendSpecificCarBtn').onclick = () => {
+      const specs = document.getElementById('specificCarSpecs').value.trim();
+      if (!specs) { document.getElementById('specificCarSpecs').focus(); return; }
+      const message = encodeURIComponent(`Hello Kabata Motors, help me find a car with the following specs: ${specs}`);
+      window.open(`https://wa.me/254721876026?text=${message}`, '_blank');
+      closeSpecificCarModal();
+    };
 
     function openCarModal(id) {
         const car = allCarsData[id];
