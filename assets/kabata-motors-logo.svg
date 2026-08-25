@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 88" role="img" aria-labelledby="title desc">
+  <title id="title">Kabata Motors</title>
+  <desc id="desc">Kabata Motors logo with a stylized road mark</desc>
+  <rect width="360" height="88" rx="10" fill="#080909"/>
+  <path d="M24 63 45 24l21 39h-9l-5-10H36l-5 10h-7Zm16-18h8l-4-8-4 8Z" fill="#ef5a32"/>
+  <path d="M78 62V25h9v13l13-13h12L97 43l16 19H101L87 47v15h-9Z" fill="#f3f1eb"/>
+  <text x="124" y="57" fill="#f3f1eb" font-family="Arial,Helvetica,sans-serif" font-size="31" font-weight="700" letter-spacing="2">KABATA</text>
+  <text x="274" y="57" fill="#ef5a32" font-family="Arial,Helvetica,sans-serif" font-size="31" font-weight="700" letter-spacing="2">M</text>
+  <path d="M310 24h26v8h-17v7h15v8h-15v7h17v8h-26V24Z" fill="#ef5a32"/>
+</svg>
